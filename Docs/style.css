@@ -1,0 +1,321 @@
+
+            *{
+                margin: 0;
+                padding: 0  ;
+            }
+            body {
+                overflow: hidden;
+            }
+            #calc_header{
+                height: 35px;
+                border-radius: 10px 10px 0px 0px;
+                display: flex;
+                width: 100%;
+                align-items: end;
+                background-color: rgb(183, 207, 232);
+                            }
+            
+            #icon_calc{
+                width: 25px;
+                height: 25px;
+                position: relative;
+                left: 10px;
+                top: -2px;
+
+            }
+            #span_calculatrice{
+                color: rgb(57, 55, 55);
+                position: relative;
+                left: 22px;
+                
+                top: -2px;
+            }
+
+            #reduire_calc:hover, #agrandir_calc:hover{
+                background: rgb(216, 220, 221);
+            }
+            #fermer_calc:hover{
+                background: rgb(196, 43, 26);
+
+            }
+            #reduire_calc, #agrandir_calc, #fermer_calc{
+                width: 12px;
+                height: 12px;
+                position: absolute;
+                height: 18px;
+                width: 46px;
+
+                /* Code temporaire*/
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid black;
+                top: 12px;
+                border-radius: 3px;
+                background: linear-gradient(to top, rgb(193, 211, 231), rgb(153, 178, 204), rgb(185, 200, 216));
+            
+
+            }
+
+            #reduire_calc{
+                right: 114px;
+            }
+            #agrandir_calc{
+                right: 61px;
+            }
+            #fermer_calc{
+                right: 10px;
+            }
+            #currentVideo{
+                
+                height: 100%;
+            }
+
+
+            #vlc_instance{
+            /*    display: none;   */
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        background-color: rgb(0, 0, 0);
+        border-radius: 10px 10px 0px 0px;
+        border: 1px solid black;
+        box-shadow: 0px 0px 1px black;
+        z-index: 10000;
+
+    }
+
+
+    
+                    #playBtn{
+                        left: 10px;
+                    }
+                    #previous{
+                        left: 68px;
+                    }
+                    #stop{
+                        left: 113px;
+                    }
+                    #next{
+                        left: 158px;
+                    }
+                    #fullscreen{
+                        left: 216px;
+                    }
+                    #setting{
+                        left: 261px;
+                    }
+
+                    #repeat{
+                        left: 305px;
+                    }
+                    #playlist{
+                        left: 360px;
+                    }
+                    #shuffle{
+                        left: 405px;
+                    }
+
+
+            #display_volume{
+                    width: 50px;
+                    height: 20px;
+                    position: absolute;
+                    right: 96px;
+                    bottom: 22px;
+                    
+                    color: rgb(133, 133, 133);
+                    text-align: right;
+            }
+
+            #defil_volume{
+                display: inline-block;
+
+                width: 120px;
+                height: 50px;
+                background: linear-gradient(to right, rgb(131, 185, 131), rgb(88, 210, 88), rgb(36, 210, 36), rgb(145, 203, 17), rgb(251, 141, 20), rgb(247, 83, 25));
+                position: absolute;
+                bottom: 0px;
+                left: 0px;
+                pointer-events: none;
+            }
+
+            #volume{
+                width: 100px;
+                height: 50px;
+                border: 2px solid rgb(130, 130, 130);
+            }
+
+
+                        
+            #topOptions span:hover{
+                background: rgba(20, 20, 20 , .2);
+
+
+            }
+            #topOptions span{
+                position: relative;
+                left: 15px;
+                border-radius: 4px;
+                font-weight: 510;
+                padding: 0px 5px 0px 5px;
+                user-select: none;
+            }
+            #topOptions{
+
+                width: 100%;
+                height: 20px;
+                display: flex;
+                gap: 10px;
+                text-align: center;
+                
+                background: linear-gradient(to top, rgb(239, 242, 249), rgb(206, 210, 226));
+            }
+
+            #optionBar{
+                width: 100%;
+                height: 80px;
+                position: absolute;
+                bottom: 0px;
+                background-color: rgb(240, 240, 240);
+                display: flex;
+                flex-direction: column;
+
+            }
+        
+
+  #exo, #exo2{
+                    position: absolute;
+                    top: 5px;
+                }
+                #exo{
+                    left: 8px;
+                }
+                #exo2{
+                    right: 8px;
+                }
+
+                #dv11{
+                    height: 10px;
+                    width: calc(100vw - 100px) ;
+                    position: absolute;
+                    top: 10px;
+                    left: calc((800px - 700px) / 2 );
+                    border-radius: 5px;
+                    background: linear-gradient(to top, rgb(215, 215, 215), rgb(196, 196, 196));
+                }
+
+                #dv111{
+                    height: 10px;
+                    width: calc(100vw - 100px) ;
+                    position: absolute;
+                    top: 0px;
+                    background: linear-gradient(to top, rgb(40, 125, 204), rgb(43, 136, 222));
+                    border-radius: 5px;
+                    pointer-events: none;
+                }
+
+                #dv1{
+                    height: 25px;
+                }
+                #dv2 span:hover{
+                    background: linear-gradient(to bottom,  rgb(231, 245, 253), rgb(172, 220, 247));
+
+                }
+
+
+                #dv2 span{
+                    border: 1px solid gray;
+                    display: inline-block;
+                    width: 20px;
+                    height:16.5px;
+                    border-radius: 4px;
+                    padding: 10px;
+                    background: linear-gradient(to top,  rgb(210, 210, 210), rgb(240, 240, 240));
+                    
+                    position: absolute;
+                    bottom: 10px;
+
+
+                }
+
+                #dv2 span img{
+                    width: 20px;
+                    height: 20px;
+                }
+
+                #playBtn{
+                border: 1px solid black;
+                width: 100px;
+                height: 100px;
+            }
+
+            #videoContainer{
+                overflow: hidden;
+                width: 100vw;
+                height: calc(100vh - 135px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+            }
+            #media{
+                background: #f0f0f0;
+                width: 400px;
+                flex-direction: column;
+                gap: 6px;
+                height: auto;
+                position: absolute;
+                left: 0; top: 0;
+                display: none;
+                align-items: center;
+                padding: 7px 0px 7px 0px ;
+            }
+            #media .mediaItem:hover{
+                background: #0078d4;
+            }
+            .mediaItem:hover  .spacing{
+                background: #0078d4;
+            }
+
+                #media .mediaItem{
+                    
+                    user-select: none;
+                    background: transparent;
+                    width: 380px ;
+                    height: 16px ;
+                    display: flex;
+                    border-radius: 4px;
+                    gap: 5px;
+                    position: relative;
+            }
+            .mediaItemIcon {
+                width: 16px; height: 16px;
+                transform: scale(.9);
+            }
+            .mediaItemLbl{
+                font-size: 14px;
+                color: black;
+          
+            }
+            .mediaItemShort{
+                width: 80px;
+                display: inline-block;
+                position: absolute;
+                right: 0px;
+
+            }
+           
+
+            .spacing{
+                height: 16px; width: 2px;
+                background-color: white;
+                display: inline-block;
+                left: 20px;
+
+            }
+
+
+            
