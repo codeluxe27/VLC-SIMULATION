@@ -1,110 +1,287 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VLC simulation</title>
-    <link rel="stylesheet" href="Docs/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VLC Media Player – Simulation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    :root {
+      --orange:      #f47920;
+      --orange-dark: #d4621a;
+      --cream:       #faf6f0;
+      --text-dark:   #2c2c2c;
+      --text-body:   #4a4a4a;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--cream);
+      font-family: 'Open Sans', sans-serif;
+      color: var(--text-dark);
+    }
+
+    /* ── DECO SHAPES ── */
+    .bg-shape-top-right {
+      position: fixed;
+      top: -40px; right: -40px;
+      width: clamp(120px, 18vw, 220px);
+      height: clamp(120px, 18vw, 220px);
+      background: linear-gradient(135deg, var(--orange) 60%, var(--orange-dark) 100%);
+      clip-path: polygon(40% 0%,100% 0%,100% 60%,60% 100%,0% 100%,0% 40%);
+      opacity: .92; z-index: 0;
+    }
+    .bg-shape-bottom-left {
+      position: fixed;
+      bottom: -60px; left: -30px;
+      width: clamp(140px, 20vw, 260px);
+      height: clamp(140px, 20vw, 260px);
+      background: linear-gradient(135deg, var(--orange) 50%, #e8a060 100%);
+      clip-path: polygon(0% 40%,60% 0%,100% 0%,100% 60%,40% 100%,0% 100%);
+      opacity: .85; z-index: 0;
+    }
+
+    /* ── PAGE SHELL ── */
+    .page {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      z-index: 1;
+      padding: 0 5vw;
+    }
+
+    /* ── HEADER ── */
+    header {
+      text-align: center;
+      padding: 3vh 0 1.5vh;
+    }
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.1rem, 3.2vw, 2.6rem);
+      color: var(--orange);
+      line-height: 1.2;
+      letter-spacing: -.5px;
+    }
+
+    /* ── CONTENT: desktop side-by-side ── */
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4vw;
+      align-items: center;
+      padding: 0 2vw;
+      min-height: 0; /* allow grid child to shrink */
+    }
+
+    /* ── DEMO IMAGE ── */
+    .demo-wrapper {
+      position: relative;
+      border-radius: 6px;
+     
+      animation: floatCard 5s ease-in-out infinite;
+      min-height: 0;
+      
+    }
+    @keyframes floatCard {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-8px); }
+    }
+    .demo-wrapper img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 44vh;
+      object-fit: cover;
+    }
+
+    /* ── TEXT BLOCK ── */
+    .text-block {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2vh;
+      min-height: 0;
+    }
+    .text-block h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1rem, 2.2vw, 1.75rem);
+      color: var(--orange);
+      line-height: 1.25;
+    }
+    .text-block p {
+      font-size: clamp(0.75rem, 1.1vw, 1rem);
+      color: var(--text-body);
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 1vh 2vw 2.5vh;
+    }
+
+    .cone-bottom-left {
+      width: clamp(160px, 17vw, 310px);
+      opacity: .9;
+      filter: drop-shadow(0 4px 12px rgba(244,121,32,.35));
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      border-radius: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(244,121,32,.25), 0 1px 4px rgba(0,0,0,.08);
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .cta-btn:hover  { transform:translateY(-3px); box-shadow:0 8px 28px rgba(244,121,32,.38); }
+    .cta-btn:active { transform:translateY(0); }
+    .cta-btn img    { width:28px; height:28px; object-fit:contain; }
+    .cta-btn span {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(0.8rem, 1.2vw, 1.05rem);
+      color: var(--orange);
+    }
+
+    /* ════════════════════════════════════════════
+       TABLET  (≤ 900px) — stack + compress
+       ════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      header h1 { font-size: clamp(1rem, 4.5vw, 1.8rem); }
+
+      .content {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        gap: 2vh;
+        align-items: start;
+        padding: 0 1vw;
+      }
+
+      .demo-wrapper img { max-height: 30vh; }
+
+      .text-block h2 { font-size: clamp(1rem, 3.5vw, 1.4rem); }
+      .text-block p  { font-size: clamp(0.72rem, 2vw, 0.92rem); line-height: 1.6; }
+
+      .vlc-bar-menus { display: none; } /* trop étroit pour les menus */
+    }
+
+    /* ════════════════════════════════════════════
+       MOBILE  (≤ 540px) — ultra compact
+       ════════════════════════════════════════════ */
+    @media (max-width: 540px) {
+      .page { padding: 0 4vw; }
+
+      header { padding: 2vh 0 1vh; }
+      header h1 {
+        font-size: clamp(0.95rem, 5.5vw, 1.3rem);
+        letter-spacing: 0;
+      }
+
+      .content { gap: 1.5vh; }
+
+      .demo-wrapper img { max-height: 24vh; }
+
+      .vlc-bar { height: 22px; font-size: 9px; gap: 6px; }
+      .vlc-bar-icon  { width:12px; height:12px; }
+
+      .text-block h2 { font-size: clamp(0.9rem, 4.5vw, 1.15rem); }
+      .text-block p  {
+        font-size: clamp(0.68rem, 3vw, 0.82rem);
+        line-height: 1.55;
+        /* trim last 2 sentences on very small screens */
+        display: -webkit-box;
+        line-clamp: 7;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      footer { padding: 0.5vh 1vw 2vh; }
+      .cone-bottom-left { width: clamp(40px, 10vw, 65px);display: none; }
+      .cta-btn { padding: 8px 14px; gap: 8px; border-radius: 8px; }
+      .cta-btn img  { width: 22px; height: 22px; }
+      .cta-btn span { font-size: clamp(0.75rem, 3.5vw, 0.9rem); }
+
+      .bg-shape-top-right  { width: 90px;  height: 90px; }
+      .bg-shape-bottom-left{ width: 110px; height: 110px; }
+
+    }
+
+    /* ════════════════════════════════════════════
+       TRÈS PETIT  (≤ 360px)
+       ════════════════════════════════════════════ */
+    @media (max-width: 360px) {
+      header h1 { font-size: 0.88rem; }
+      .demo-wrapper img { max-height: 20vh; }
+      .text-block p { line-clamp: 5; }
+      
+    }
+  </style>
 </head>
 <body>
-    
-<!--//////////////////////////////////////-->
 
-<div id="vlc_instance">
-    <div id="calc_header">
-                <img src="Wallpaper/téléchargé.png" alt="" id="icon_calc">
-                <span id="span_calculatrice">VLC media player </span>
-                
-            
 
-            </div>
-            <div id="topOptions">
-                <span id="mediaAct">Média</span>
-                <span>Lecture</span>
-                <span>Audio</span>
-                <span>Vidéo</span>
-                <span>Sous-titre</span>
-                <span>Outils</span>
-                <span>Vue</span>
-                <span>Aide</span>
+  <div class="page">
 
-            </div>
-            
-            <div id="videoContainer">
-                <div id = "media" style="display: none; ">
-                    
-                    
-                </div>
-                <script>
-                    
-                </script>
-                <img src="Wallpaper/icons8-vlc-96.png" alt="" style="position: absolute; z-index : -133 ; transform : scale(2)">
-                <video  src="Wallpaper/100223-video-720.mp4" id="currentVideo"></video>
+    <header>
+      <h1>Bienvenue sur ma page de simulation de<br>VLC media player</h1>
+    </header>
 
-            </div>
+    <div class="content">
 
-            <div id="optionBar">
-                <div id="dv1">
-                    <div id="exo">00:00</div>
-                    <div id="dv11">
-                        <div id="dv111">
-                        
-                        </div>    
-                    </div>
-                    <div id="exo2">00:00</div>
-                </div>
-            
-                <div id="dv2">
-                            
+      <!-- Image démo -->
+      <div class="demo-wrapper">
+  
+        <img src="Wallpaper/test.png" alt="Démonstration VLC web" />
+      </div>
 
-                    <span id="playBtn" style="width: 25px; height: 25px; bottom: 5px;"><img src="Wallpaper/icons8-play-96.png" style="width: 25px; height: 25px;"></span>
-                    <span id="previous"><img src="Wallpaper/icons8-back-67.png" alt=""></span>
+      <!-- Texte -->
+      <div class="text-block">
+        <h2>Quand VLC rencontre le Web</h2>
+        <p>
+          Cette démo est une reproduction interactive de VLC Media Player
+          réalisée entièrement pour le web. Le projet simule l'interface,
+          les animations et l'expérience utilisateur du célèbre lecteur
+          multimédia afin d'explorer le design desktop moderne avec HTML,
+          CSS et JavaScript. L'objectif était de recréer l'ambiance et le
+          comportement visuel de VLC directement dans le navigateur, tout
+          en gardant une interface fluide, responsive et fidèle à l'original.
+        </p>
+      </div>
 
-                    <span id="stop"><img src="Wallpaper/icons8-stop-90.png" alt=""></span>
-                    <span id="next"><img src="Wallpaper/icons8-forward-67.png" alt=""></span>
-                    <span id="fullscreen"><img src="Wallpaper/icons8-fullscreen-100.png" alt=""></span>
-                    <span id="setting"><img src="Wallpaper/icons8-setting-64.png" alt=""></span>
-                    <span id="repeat"><img src="Wallpaper/icons8-repeat-64.png" alt=""></span>
-                    <span id="playlist"><img src="Wallpaper/icons8-playlist-96.png" alt=""></span>
-                    <span id="shuffle"><img src="Wallpaper/icons8-shuffle-90.png" alt=""></span>
-                    
-                    <style></style>
+    </div>
 
-                    <img src="Wallpaper/icons8-volume-96.png" style = "
-                    width: 20px; height: 20px;
-                    position: absolute;
-                    bottom: 4px;
-                    right: 150px;
-                    " alt="">
+    <footer>
+      <!-- Cône décoratif -->
+      <span class="cone-bottom-left">
+          Ctrl+O pour ouvrir une vidéo dans la simulation !
+      </span>
 
-                    <div id = "display_volume">100%</div>
-                    <span id="volume" style="
-                    width: 100px;
-                    height: 20px;
-                    border: 2px solid rgb(130, 130, 130);
-                    overflow: hidden;
-                    clip-path:  polygon(100% 0%, 100% 100%, 0% 100%);
-                    right: 20px;
-                    ">
-                    <span style="
-                        width: 100px;
-                    height: 20px;
-                    overflow: hidden;
-                    clip-path:  polygon(100% 0%, 100% 100%, 0% 100%);
-                    left: 0px;
-                    bottom: 0px;
-                    " id = 'volume2'>
-                    
-                    <div id="defil_volume"> </div>
-                    
-                </span>
-                    
-                </span>
+      <!-- Bouton CTA -->
+      <a href="vlc.html" class="cta-btn">
+        <img src="Wallpaper/téléchargé.png" alt="VLC" />
+        <span>Lancer VLC</span>
+      </a>
+    </footer>
 
-                </div>
-                <span></span>
-</div>        
-<script src="Docs/script.js"></script>
+  </div>
+
 </body>
 </html>

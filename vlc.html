@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VLC simulation</title>
+    <link rel="stylesheet" href="Docs/style.css">
+
+</head>
+<body>
+    
+<!--//////////////////////////////////////-->
+
+<div id="vlc_instance">
+    <div id="calc_header">
+                <img src="Wallpaper/téléchargé.png" alt="" id="icon_calc">
+                <span id="span_calculatrice">VLC media player </span>
+                
+            
+
+            </div>
+            <div id="topOptions">
+                <span id="mediaAct">Média</span>
+                <span>Lecture</span>
+                <span>Audio</span>
+                <span>Vidéo</span>
+                <span>Sous-titre</span>
+                <span>Outils</span>
+                <span>Vue</span>
+                <span>Aide</span>
+
+            </div>
+            
+            <div id="videoContainer">
+                <div id = "media" style="display: none; ">
+                    
+                    
+                </div>
+                <script>
+                    
+                </script>
+                <img src="Wallpaper/icons8-vlc-96.png" alt="" style="position: absolute; z-index : -133 ; transform : scale(2)">
+                <video  src="Wallpaper/100223-video-720.mp4" id="currentVideo"></video>
+
+            </div>
+
+            <div id="optionBar">
+                <div id="dv1">
+                    <div id="exo">00:00</div>
+                    <div id="dv11">
+                        <div id="dv111">
+                        
+                        </div>    
+                    </div>
+                    <div id="exo2">00:00</div>
+                </div>
+            
+                <div id="dv2">
+                            
+
+                    <span id="playBtn" style="width: 25px; height: 25px; bottom: 5px;"><img src="Wallpaper/icons8-play-96.png" style="width: 25px; height: 25px;"></span>
+                    <span id="previous"><img src="Wallpaper/icons8-back-67.png" alt=""></span>
+
+                    <span id="stop"><img src="Wallpaper/icons8-stop-90.png" alt=""></span>
+                    <span id="next"><img src="Wallpaper/icons8-forward-67.png" alt=""></span>
+                    <span id="fullscreen"><img src="Wallpaper/icons8-fullscreen-100.png" alt=""></span>
+                    <span id="setting"><img src="Wallpaper/icons8-setting-64.png" alt=""></span>
+                    <span id="repeat"><img src="Wallpaper/icons8-repeat-64.png" alt=""></span>
+                    <span id="playlist"><img src="Wallpaper/icons8-playlist-96.png" alt=""></span>
+                    <span id="shuffle"><img src="Wallpaper/icons8-shuffle-90.png" alt=""></span>
+                    
+                    <style></style>
+
+                    <img src="Wallpaper/icons8-volume-96.png" style = "
+                    width: 20px; height: 20px;
+                    position: absolute;
+                    bottom: 4px;
+                    right: 150px;
+                    " alt="">
+
+                    <div id = "display_volume">100%</div>
+                    <span id="volume" style="
+                    width: 100px;
+                    height: 20px;
+                    border: 2px solid rgb(130, 130, 130);
+                    overflow: hidden;
+                    clip-path:  polygon(100% 0%, 100% 100%, 0% 100%);
+                    right: 20px;
+                    ">
+                    <span style="
+                        width: 100px;
+                    height: 20px;
+                    overflow: hidden;
+                    clip-path:  polygon(100% 0%, 100% 100%, 0% 100%);
+                    left: 0px;
+                    bottom: 0px;
+                    " id = 'volume2'>
+                    
+                    <div id="defil_volume"> </div>
+                    
+                </span>
+                    
+                </span>
+
+                </div>
+                <span></span>
+</div>        
+<script src="Docs/script.js"></script>
+</body>
+</html>
