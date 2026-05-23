@@ -1,5 +1,171 @@
 
-    document.getElementsByTagName('body')[0].addEventListener('contextmenu' , (event)=>{
+// Remplir les options 
+                    let media = document.getElementById('media') ;
+                    const mediaExemp = [
+    {
+        "iconPresent": true,
+        "iconSrc": "play.svg",
+        "text": "Ouvrir un fichier...",
+        "raccourci": "Ctrl+O",
+        "isActivated": true , 
+        "id" : "Open"
+    },
+    {
+        "iconPresent": true,
+        "iconSrc": "play.svg",
+        "text": "Ouvrir plusieurs fichiers...",
+        "raccourci": "Ctrl+Shift+O",
+        "isActivated": true
+    },
+    {
+        "iconPresent": true,
+        "iconSrc": "folder.svg",
+        "text": "Ouvrir un dossier...",
+        "raccourci": "Ctrl+F",
+        "isActivated": true
+    },
+    {
+        "iconPresent": true,
+        "iconSrc": "disc.svg",
+        "text": "Ouvrir un disque...",
+        "raccourci": "Ctrl+D",
+        "isActivated": true
+    },
+    {
+        "iconPresent": true,
+        "iconSrc": "network.svg",
+        "text": "Ouvrir un flux réseau...",
+        "raccourci": "Ctrl+N",
+        "isActivated": true
+    },
+    {
+        "iconPresent": true,
+        "iconSrc": "capture.svg",
+        "text": "Ouvrir un périphérique de capture...",
+        "raccourci": "Ctrl+C",
+        "isActivated": true
+    },
+    {
+        "iconPresent": false,
+        "iconSrc": "iconNotPresent",
+        "text": "Ouvrir un emplacement depuis le presse-papier",
+        "raccourci": "Ctrl+V",
+        "isActivated": true
+    },
+    {
+        "iconPresent": false,
+        "iconSrc": "iconNotPresent",
+        "text": "Médias récents",
+        "raccourci": null,
+        "isActivated": true,
+        "hasSubmenu": true
+    },
+    {
+        "iconPresent": false,
+        "iconSrc": "iconNotPresent",
+        "text": "Enregistrer la liste de lecture...",
+        "raccourci": "Ctrl+Y",
+        "isActivated": true
+    },
+    {
+        "iconPresent": false,
+        "iconSrc": "iconNotPresent",
+        "text": "Convertir / Enregistrer...",
+        "raccourci": "Ctrl+R",
+        "isActivated": true
+    },
+    {
+        "iconPresent": true,
+        "iconSrc": "wire.svg",
+        "text": "Diffuser...",
+        "raccourci": "Ctrl+S",
+        "isActivated": true
+    },
+    {
+        "iconPresent": false,
+        "iconSrc": "iconNotPresent",
+        "text": "Quitter à la fin de la liste de lecture",
+        "raccourci": null,
+        "isActivated": true
+    },
+    {
+        "iconPresent": true,
+        "iconSrc": "quit.svg",
+        "text": "Quitter",
+        "raccourci": "Ctrl+Q",
+        "isActivated": true
+    }
+];
+
+
+function selectFile() {
+
+    // Création dynamique
+    const input = document.createElement("input");
+
+    input.type = "file";
+
+    // Types autorisés (optionnel)
+    input.accept = "*";
+
+    // Quand un fichier est choisi
+    input.onchange = (event) => {
+
+        const file = event.target.files[0];
+
+        if(file) {
+            const videoURL = URL.createObjectURL(file);
+            document.getElementById('currentVideo').src = videoURL;
+            currentVideo.currentTime = 0;
+            dv111.style.width  = 0 ; 
+
+                if(currentVideo.played){
+                   playimg.src = 'Wallpaper/icons8-play-96.png' 
+               
+                }
+        }
+    };
+
+    // Ouvre la fenêtre
+    input.click();
+}
+
+document.addEventListener('keydown', function(event) {
+    // Vérifier si Ctrl est enfoncé et si la touche est 'o' (ou 'O')
+    if (event.ctrlKey && (event.key === 'o' || event.key === 'O')) {
+        event.preventDefault();  // Empêche le navigateur d'ouvrir son dialogue
+        selectFile()
+    }
+});
+
+                    function ActOption(srcId, actived ){
+                        document.getElementById(srcId).onclick = () =>{
+                            actived.style.display = actived.style.display == 'none' ? 'flex'  :  'none' ;
+                        }             
+                    }
+                    document.getElementsByTagName('body')[0].onclick = (event)=>{
+                    if(event.target != document.getElementById('mediaAct')){
+                            document.getElementById('media').style.display = 'none'
+                    }
+                    }
+                    ActOption('mediaAct', document.getElementById('media') )
+
+                    function options(exemplaire , space){
+                        for(let el in exemplaire){
+                            space.innerHTML += `
+                                <span class="mediaItem" ${ exemplaire[el].id == 'Open' ? "onClick = 'selectFile()'"  :  ''}>
+                                    <img src="Wallpaper/${exemplaire[el].iconSrc}" style='opacity  : ${exemplaire[el].iconPresent ? '1' : '0'}' alt="" class="mediaItemIcon">
+                                    <span class="spacing" > </span>
+                                    <span class="mediaItemLbl">${exemplaire[el].text}</span>
+                                    <span class="mediaItemShort">${exemplaire[el].raccourci == null ? '' : exemplaire[el].raccourci}</span>
+                    </span>
+                            `
+                        }
+                    }
+                    options(mediaExemp , media)
+
+
+document.getElementsByTagName('body')[0].addEventListener('contextmenu' , (event)=>{
             event.preventDefault()
     })
     //////////////////////////// VLC //////////////// 
@@ -46,20 +212,8 @@ function open(){
          
             function resize(){
             } 
-     let underlined_letters = ["M","l", "A", "V", "t", "s","i", "H"]
-            let span_opt = document.querySelectorAll('#topOptions span')
-            for(let el in span_opt){
+  
             
-            try{
-              
-
-                if(span_opt[el].innerHTML.includes(underlined_letters[el])){
-                    span_opt[el].innerHTML = span_opt[el].innerHTML.replace(underlined_letters[el], `<u>${underlined_letters[el]}</u>`) 
-                }
-            }catch(e){
-
-            }
-            }
             let currentVideo = document.getElementById('currentVideo');
             
             let playimg = document.querySelector('#playBtn img');
