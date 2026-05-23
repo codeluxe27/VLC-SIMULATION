@@ -116,6 +116,7 @@ function selectFile() {
         if(file) {
             const videoURL = URL.createObjectURL(file);
             document.getElementById('currentVideo').src = videoURL;
+            document.getElementById('currentVideo').play() ;
             currentVideo.currentTime = 0;
             dv111.style.width  = 0 ; 
 
@@ -174,44 +175,6 @@ document.getElementsByTagName('body')[0].addEventListener('contextmenu' , (event
 
 
 
-
-let fermer_calc = document.getElementById('fermer_calc');
-let mainApp = document.getElementById('mainApp');
-
-const vlc_instance = document.getElementById('vlc_instance');
-
-function close(){
-    vlc_instance.style.transition = '.2s opacity 0s';
-
-   vlc_instance.style.transform = 'scale(.98)';
-   vlc_instance.style.opacity = '.4';
-
-   setTimeout(()=>{
-        vlc_instance.style.display = 'none'
-    }, 100)
-}
-
-function open(){
-    vlc_instance.style.transition = '.2s opacity 0s';
-
-
-   setTimeout(()=>{
-   vlc_instance.style.transform = 'scale(1)';
-   vlc_instance.style.opacity = '1';
-
-}, 90)
-        vlc_instance.style.display = 'block'
-
-}
-
-
-
-
-            const ci_width = vlc_instance.offsetWidth;
-            const calc_header2 = document.getElementById('calc_header');
-         
-            function resize(){
-            } 
   
             
             let currentVideo = document.getElementById('currentVideo');
@@ -310,7 +273,9 @@ let defiling2 = false;
 
             currentVideo.addEventListener('timeupdate', ()=>{
                 let totalDefil = document.getElementsByTagName('body')[0].offsetWidth - 100
-                
+      //          if(){
+
+        //        }
                 displayLevel = (Math.ceil(currentVideo.currentTime * totalDefil / currentVideo.duration)) + 'px';
 
 
@@ -363,7 +328,7 @@ let defiling2 = false;
             })
             // Managing next and previous
 
-            let listOfMusic = ["damso_moroze.mp4" ,"damso_fibonacci.mp4" , "damso_wolof.mp4"];
+           
             let next = document.getElementById('next');
             let previous = document.getElementById('previous');
             let current_music = 0;
@@ -373,27 +338,7 @@ let defiling2 = false;
                 exo2.innerHTML = '00:00';
                 currentVideo.currentTime = 0;
 
-                switch(current_music){
-                    case 0:
-                     currentVideo.src = currentVideo.src.replace(listOfMusic[0], listOfMusic[1])
-                     current_music += 1;
-                     break;
-
-                    case 1: 
-                     currentVideo.src = currentVideo.src.replace(listOfMusic[1], listOfMusic[2])
-                     current_music += 1;
-                     break;
-
-                    case 2: 
-                     currentVideo.src = currentVideo.src.replace(listOfMusic[2], listOfMusic[0])
-                     current_music = 0;
-                     break;
-
-                    default:
-                    pass;
-                    
-
-                }
+                
             })
 
 
@@ -404,27 +349,8 @@ let defiling2 = false;
                 currentVideo.currentTime = 0;
 
                 
-                switch(current_music){
-                    case 0:
-                     currentVideo.src = currentVideo.src.replace(listOfMusic[0], listOfMusic[2])
-                     current_music = 2;
-                     break;
+              
 
-                    case 1: 
-                     currentVideo.src = currentVideo.src.replace(listOfMusic[1], listOfMusic[0])
-                     current_music = 0;
-                     break;
-
-                    case 2: 
-                     currentVideo.src = currentVideo.src.replace(listOfMusic[2], listOfMusic[1])
-                     current_music = 1;
-                     break;
-
-                    default:
-                    pass;
-                    
-
-                }
             })
 
             // Cool , now manage stop

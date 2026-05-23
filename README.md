@@ -11,7 +11,7 @@ Même si ce n'est pas une réplique à 100 %, les contrôles classiques de lectu
 - ⏱️ Barre de progression (seek)
 - 🖥️ Mode plein écran
 - 🎨 Interface inspirée de VLC (design sombre)
-- Responsive (fonctionne sur mobile et desktop)
+
 
 ## 🛠 Technologies utilisées
 
