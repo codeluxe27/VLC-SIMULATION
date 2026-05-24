@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>VLC Media Player – Simulation</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
   <style>
@@ -10,9 +10,8 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-    
     }
-    *::selection{
+    *::selection {
       background: #ED6B0033;
     }
 
@@ -33,25 +32,7 @@
       color: var(--text-dark);
     }
 
-    /* ── DECO SHAPES ── */
-    .bg-shape-top-right {
-      position: fixed;
-      top: -40px; right: -40px;
-      width: clamp(120px, 18vw, 220px);
-      height: clamp(120px, 18vw, 220px);
-      background: linear-gradient(135deg, var(--orange) 60%, var(--orange-dark) 100%);
-      clip-path: polygon(40% 0%,100% 0%,100% 60%,60% 100%,0% 100%,0% 40%);
-      opacity: .92; z-index: 0;
-    }
-    .bg-shape-bottom-left {
-      position: fixed;
-      bottom: -60px; left: -30px;
-      width: clamp(140px, 20vw, 260px);
-      height: clamp(140px, 20vw, 260px);
-      background: linear-gradient(135deg, var(--orange) 50%, #e8a060 100%);
-      clip-path: polygon(0% 40%,60% 0%,100% 0%,100% 60%,40% 100%,0% 100%);
-      opacity: .85; z-index: 0;
-    }
+
 
     /* ── PAGE SHELL ── */
     .page {
@@ -61,72 +42,90 @@
       display: grid;
       grid-template-rows: auto 1fr auto;
       z-index: 1;
-      padding: 0 5vw;
+      padding: 0 clamp(16px, 5vw, 80px);
+      max-width: 100%;
     }
 
     /* ── HEADER ── */
     header {
       text-align: center;
-      padding: 3vh 0 1.5vh;
+      padding: clamp(12px, 3vh, 32px) 0 clamp(8px, 1.5vh, 20px);
     }
     header h1 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 900;
-      font-size: clamp(1.1rem, 3.2vw, 2.6rem);
+      font-size: clamp(1rem, 3vw, 2.4rem);
       color: var(--orange);
       line-height: 1.2;
-      letter-spacing: -.5px;
+      letter-spacing: -0.5px;
+      word-break: break-word;
+      hyphens: auto;
+    }
+    header h1 br {
+      display: none;
+    }
+    @media (min-width: 541px) {
+      header h1 br {
+        display: inline;
+      }
     }
 
-    /* ── CONTENT: desktop side-by-side ── */
+    /* ── CONTENT ── */
     .content {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4vw;
+      gap: clamp(16px, 4vw, 60px);
       align-items: center;
-      padding: 0 2vw;
-      min-height: 0; /* allow grid child to shrink */
+      padding: 0 clamp(8px, 2vw, 32px);
+      min-height: 0;
+      overflow: hidden;
     }
 
     /* ── DEMO IMAGE ── */
     .demo-wrapper {
       position: relative;
       border-radius: 6px;
-     
       animation: floatCard 5s ease-in-out infinite;
       min-height: 0;
-      
+      overflow: hidden;
+      width: 100%;
     }
     @keyframes floatCard {
-      0%,100% { transform: translateY(0); }
+      0%, 100% { transform: translateY(0); }
       50%      { transform: translateY(-8px); }
     }
     .demo-wrapper img {
       display: block;
       width: 100%;
       height: auto;
-      max-height: 44vh;
-      object-fit: cover;
+      max-height: 42vh;
+      object-fit: contain;
+      border-radius: 6px;
     }
 
     /* ── TEXT BLOCK ── */
     .text-block {
       display: flex;
       flex-direction: column;
-      gap: 1.2vh;
+      gap: clamp(8px, 1.2vh, 16px);
       min-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-right: 4px;
     }
     .text-block h2 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
-      font-size: clamp(1rem, 2.2vw, 1.75rem);
+      font-size: clamp(0.95rem, 2vw, 1.7rem);
       color: var(--orange);
       line-height: 1.25;
+      word-break: break-word;
     }
     .text-block p {
-      font-size: clamp(0.75rem, 1.1vw, 1rem);
+      font-size: clamp(0.75rem, 1.05vw, 0.95rem);
       color: var(--text-body);
       line-height: 1.7;
+      word-break: break-word;
     }
 
     /* ── FOOTER ── */
@@ -134,13 +133,20 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      padding: 1vh 2vw 2.5vh;
+      padding: clamp(6px, 1vh, 16px) clamp(8px, 2vw, 32px) clamp(12px, 2.5vh, 32px);
+      gap: 12px;
+      min-height: 0;
     }
 
-    .cone-bottom-left {
-      width: clamp(160px, 17vw, 310px);
-      opacity: .9;
-      filter: drop-shadow(0 4px 12px rgba(244,121,32,.35));
+    .shortcut-hint {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: clamp(0.65rem, 1vw, 0.85rem);
+      color: var(--orange-dark);
+      opacity: 0.9;
+      max-width: 50%;
+      word-break: break-word;
+      line-height: 1.4;
     }
 
     .cta-btn {
@@ -149,93 +155,136 @@
       gap: 10px;
       background: white;
       border-radius: 10px;
-      padding: 10px 20px;
+      padding: clamp(8px, 1.2vh, 14px) clamp(14px, 1.5vw, 24px);
       cursor: pointer;
       box-shadow: 0 4px 20px rgba(244,121,32,.25), 0 1px 4px rgba(0,0,0,.08);
       text-decoration: none;
       transition: transform .2s, box-shadow .2s;
+      flex-shrink: 0;
+      white-space: nowrap;
     }
-    .cta-btn:hover  { transform:translateY(-3px); box-shadow:0 8px 28px rgba(244,121,32,.38); }
-    .cta-btn:active { transform:translateY(0); }
-    .cta-btn img    { width:28px; height:28px; object-fit:contain; }
+    .cta-btn:hover  { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(244,121,32,.38); }
+    .cta-btn:active { transform: translateY(0); }
+    .cta-btn img    { width: clamp(22px, 2vw, 28px); height: clamp(22px, 2vw, 28px); object-fit: contain; }
     .cta-btn span {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
-      font-size: clamp(0.8rem, 1.2vw, 1.05rem);
+      font-size: clamp(0.75rem, 1.2vw, 1.05rem);
       color: var(--orange);
     }
 
     /* ════════════════════════════════════════════
-       TABLET  (≤ 900px) — stack + compress
+       TABLET  (≤ 900px)
        ════════════════════════════════════════════ */
     @media (max-width: 900px) {
-      header h1 { font-size: clamp(1rem, 4.5vw, 1.8rem); }
+      header h1 { font-size: clamp(1rem, 4vw, 1.8rem); }
 
       .content {
         grid-template-columns: 1fr;
-        grid-template-rows: auto auto;
-        gap: 2vh;
+        grid-template-rows: auto 1fr;
+        gap: clamp(12px, 2vh, 24px);
         align-items: start;
-        padding: 0 1vw;
+        padding: 0 clamp(4px, 1vw, 16px);
       }
 
-      .demo-wrapper img { max-height: 30vh; }
+      .demo-wrapper img { max-height: 28vh; }
 
-      .text-block h2 { font-size: clamp(1rem, 3.5vw, 1.4rem); }
-      .text-block p  { font-size: clamp(0.72rem, 2vw, 0.92rem); line-height: 1.6; }
-
-      .vlc-bar-menus { display: none; } /* trop étroit pour les menus */
+      .text-block h2 { font-size: clamp(1rem, 3.2vw, 1.4rem); }
+      .text-block p  { font-size: clamp(0.72rem, 1.8vw, 0.92rem); line-height: 1.6; }
     }
 
     /* ════════════════════════════════════════════
-       MOBILE  (≤ 540px) — ultra compact
+       MOBILE  (≤ 540px)
        ════════════════════════════════════════════ */
     @media (max-width: 540px) {
-      .page { padding: 0 4vw; }
+      .page { padding: 0 clamp(12px, 4vw, 20px); }
 
-      header { padding: 2vh 0 1vh; }
+      header { padding: clamp(8px, 2vh, 16px) 0 clamp(6px, 1vh, 12px); }
       header h1 {
-        font-size: clamp(0.95rem, 5.5vw, 1.3rem);
+        font-size: clamp(0.9rem, 5vw, 1.3rem);
         letter-spacing: 0;
       }
 
-      .content { gap: 1.5vh; }
+      .content { gap: clamp(10px, 1.5vh, 16px); }
 
-      .demo-wrapper img { max-height: 24vh; }
+      .demo-wrapper img { max-height: 22vh; }
 
-      .vlc-bar { height: 22px; font-size: 9px; gap: 6px; }
-      .vlc-bar-icon  { width:12px; height:12px; }
-
-      .text-block h2 { font-size: clamp(0.9rem, 4.5vw, 1.15rem); }
+      .text-block h2 { font-size: clamp(0.9rem, 4vw, 1.15rem); }
       .text-block p  {
-        font-size: clamp(0.68rem, 3vw, 0.82rem);
+        font-size: clamp(0.68rem, 2.8vw, 0.82rem);
         line-height: 1.55;
-        /* trim last 2 sentences on very small screens */
-        display: -webkit-box;
-        line-clamp: 7;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
       }
 
-      footer { padding: 0.5vh 1vw 2vh; }
-      .cone-bottom-left { width: clamp(40px, 10vw, 65px);display: none; }
-      .cta-btn { padding: 8px 14px; gap: 8px; border-radius: 8px; }
-      .cta-btn img  { width: 22px; height: 22px; }
-      .cta-btn span { font-size: clamp(0.75rem, 3.5vw, 0.9rem); }
+      footer {
+        padding: clamp(4px, 0.8vh, 10px) clamp(4px, 1vw, 12px) clamp(10px, 2vh, 20px);
+        justify-content: center;
+      }
 
-      .bg-shape-top-right  { width: 90px;  height: 90px; }
-      .bg-shape-bottom-left{ width: 110px; height: 110px; }
+      .shortcut-hint { display: none; }
 
+      .cta-btn {
+        padding: 10px 20px;
+        gap: 8px;
+        border-radius: 8px;
+        width: 100%;
+        justify-content: center;
+      }
+      .cta-btn img  { width: 24px; height: 24px; }
+      .cta-btn span { font-size: clamp(0.8rem, 3.5vw, 0.95rem); }
+
+      .bg-shape-top-right  { width: 80px;  height: 80px; top: -30px; right: -30px; }
+      .bg-shape-bottom-left{ width: 100px; height: 100px; bottom: -40px; left: -20px; }
     }
 
     /* ════════════════════════════════════════════
        TRÈS PETIT  (≤ 360px)
        ════════════════════════════════════════════ */
     @media (max-width: 360px) {
-      header h1 { font-size: 0.88rem; }
-      .demo-wrapper img { max-height: 20vh; }
-      .text-block p { line-clamp: 5; }
-      
+      header h1 { font-size: 0.85rem; }
+      .demo-wrapper img { max-height: 18vh; }
+      .text-block p { font-size: 0.65rem; }
+      .cta-btn { padding: 8px 16px; }
+    }
+
+    /* Paysage mobile */
+    @media (max-height: 500px) and (max-width: 900px) {
+      header { padding: 6px 0 4px; }
+      header h1 { font-size: clamp(0.8rem, 3vh, 1.1rem); }
+      .content {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 12px;
+      }
+      .demo-wrapper img { max-height: 55vh; }
+      .text-block { gap: 6px; }
+      .text-block h2 { font-size: clamp(0.8rem, 2.5vh, 1rem); }
+      .text-block p { font-size: clamp(0.6rem, 1.8vh, 0.8rem); line-height: 1.45; }
+      footer { padding: 4px 8px 8px; }
+      .shortcut-hint { display: none; }
+    }
+
+    /* Très grand écran */
+    @media (min-width: 1600px) {
+      .page {
+        padding: 0 calc((100vw - 1400px) / 2);
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+      .content { gap: 60px; }
+      .demo-wrapper img { max-height: 38vh; }
+    }
+
+    /* Scrollbar */
+    .text-block::-webkit-scrollbar {
+      width: 4px;
+    }
+    .text-block::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .text-block::-webkit-scrollbar-thumb {
+      background: var(--orange);
+      border-radius: 2px;
+      opacity: 0.5;
     }
   </style>
 </head>
@@ -252,8 +301,7 @@
 
       <!-- Image démo -->
       <div class="demo-wrapper">
-  
-        <img src="Wallpaper/test.png" alt="Démonstration VLC web" />
+        <img src="Wallpaper/test.png" alt="Démonstration VLC web" loading="lazy" />
       </div>
 
       <!-- Texte -->
@@ -273,9 +321,9 @@
     </div>
 
     <footer>
-      <!-- Cône décoratif -->
-      <span class="cone-bottom-left">
-          Ctrl+O pour ouvrir une vidéo dans la simulation !
+      <!-- Raccourci clavier -->
+      <span class="shortcut-hint">
+        Ctrl+O pour ouvrir une vidéo dans la simulation !
       </span>
 
       <!-- Bouton CTA -->
